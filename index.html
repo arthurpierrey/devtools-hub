@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <title>Free Developer Tools — JSON Formatter, Regex Tester, Diff Checker &amp; More</title>
+  <meta name="description" content="Collection of free, privacy-first developer tools. JSON formatter, regex tester, Base64 encoder, diff checker, hash generator, screenshot beautifier. All browser-based, no signup." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://arthurpierrey.github.io/devtools-hub/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Free Developer Tools — JSON Formatter, Regex Tester, Diff Checker &amp; More" />
+  <meta property="og:description" content="Collection of free, privacy-first developer tools. JSON formatter, regex tester, Base64 encoder, diff checker, hash generator, screenshot beautifier. All browser-based, no signup." />
+  <meta property="og:url" content="https://arthurpierrey.github.io/devtools-hub/" />
+  <meta property="og:site_name" content="DevTools Hub" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Developer Tools — JSON Formatter, Regex Tester, Diff Checker &amp; More" />
+  <meta name="twitter:description" content="Collection of free, privacy-first developer tools. All browser-based, no signup, no tracking." />
+
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "DevTools Hub",
+    "url": "https://arthurpierrey.github.io/devtools-hub/",
+    "description": "Collection of free, privacy-first developer tools.",
+    "author": {
+      "@type": "Person",
+      "name": "Arthur Pierrey",
+      "url": "https://github.com/arthurpierrey"
+    },
+    "hasPart": {
+      "@type": "ItemList",
+      "name": "Free Developer Tools",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "SoftwareApplication",
+            "name": "ScreenSnap",
+            "url": "https://arthurpierrey.github.io/screensnap/app.html",
+            "description": "Beautify screenshots with gradients, shadows & device frames",
+            "applicationCategory": "DeveloperApplication",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "SoftwareApplication",
+            "name": "OG Preview",
+            "url": "https://arthurpierrey.github.io/ogpreview/",
+            "description": "Preview how your site looks on Twitter, LinkedIn, Discord, Slack",
+            "applicationCategory": "DeveloperApplication",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "SoftwareApplication",
+            "name": "DevFormat",
+            "url": "https://arthurpierrey.github.io/devformat/",
+            "description": "Format, beautify, validate & minify JSON",
+            "applicationCategory": "DeveloperApplication",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "SoftwareApplication",
+            "name": "Base64 Tool",
+            "url": "https://base64tool-phi.vercel.app/",
+            "description": "Encode & decode Base64 (text + images)",
+            "applicationCategory": "DeveloperApplication",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "SoftwareApplication",
+            "name": "RegexLab",
+            "url": "https://regextester-kappa.vercel.app/",
+            "description": "Test regex with live highlighting & capture groups",
+            "applicationCategory": "DeveloperApplication",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "SoftwareApplication",
+            "name": "DiffView",
+            "url": "https://diffchecker-chi.vercel.app/",
+            "description": "Compare texts with side-by-side diff highlighting",
+            "applicationCategory": "DeveloperApplication",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "SoftwareApplication",
+            "name": "HashGen",
+            "url": "https://hashgen-five.vercel.app/",
+            "description": "Generate MD5, SHA-256, SHA-512 hashes",
+            "applicationCategory": "DeveloperApplication",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+          }
+        }
+      ]
+    }
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0a0a1a;
+      --bg-card: #0f0f24;
+      --bg-card-hover: #131330;
+      --border: rgba(255,255,255,0.07);
+      --border-hover: rgba(255,255,255,0.15);
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --input-bg: rgba(255,255,255,0.05);
+      --radius: 16px;
+      --radius-sm: 8px;
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+      /* Accent colors */
+      --accent-screensnap: #7c3aed;
+      --accent-ogpreview: #06b6d4;
+      --accent-devformat: #22c55e;
+      --accent-base64: #3b82f6;
+      --accent-regexlab: #f59e0b;
+      --accent-diffview-a: #ef4444;
+      --accent-diffview-b: #22c55e;
+      --accent-hashgen: #a78bfa;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 96px 24px 80px;
+      text-align: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(124,58,237,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(6,182,212,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 30% at 20% 80%, rgba(167,139,250,0.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(124,58,237,0.15);
+      border: 1px solid rgba(124,58,237,0.3);
+      color: #c4b5fd;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      animation: fadeInDown 0.6s ease both;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #fff 30%, #c4b5fd 70%, #67e8f9 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeInDown 0.6s 0.1s ease both;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0 auto 40px;
+      animation: fadeInDown 0.6s 0.2s ease both;
+    }
+
+    /* ── SEARCH ── */
+    .search-wrap {
+      position: relative;
+      max-width: 440px;
+      margin: 0 auto;
+      animation: fadeInDown 0.6s 0.3s ease both;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+      pointer-events: none;
+      width: 18px;
+      height: 18px;
+    }
+
+    #search {
+      width: 100%;
+      padding: 14px 20px 14px 46px;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--text);
+      font-size: 15px;
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+      backdrop-filter: blur(8px);
+    }
+
+    #search::placeholder { color: var(--text-dim); }
+
+    #search:focus {
+      border-color: rgba(124,58,237,0.5);
+      background: rgba(255,255,255,0.07);
+      box-shadow: 0 0 0 3px rgba(124,58,237,0.12);
+    }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    .tools-count {
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 13px;
+      margin-bottom: 40px;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── GRID ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── CARD ── */
+    .card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow: hidden;
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition), background var(--transition);
+      animation: fadeInUp 0.5s ease both;
+      cursor: default;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity var(--transition);
+      border-radius: var(--radius);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    /* Accent glow per card */
+    .card[data-accent="screensnap"]:hover { box-shadow: 0 8px 40px rgba(124,58,237,0.2); }
+    .card[data-accent="screensnap"]::before { background: radial-gradient(ellipse 80% 80% at 50% 0%, rgba(124,58,237,0.08) 0%, transparent 70%); }
+
+    .card[data-accent="ogpreview"]:hover { box-shadow: 0 8px 40px rgba(6,182,212,0.2); }
+    .card[data-accent="ogpreview"]::before { background: radial-gradient(ellipse 80% 80% at 50% 0%, rgba(6,182,212,0.08) 0%, transparent 70%); }
+
+    .card[data-accent="devformat"]:hover { box-shadow: 0 8px 40px rgba(34,197,94,0.2); }
+    .card[data-accent="devformat"]::before { background: radial-gradient(ellipse 80% 80% at 50% 0%, rgba(34,197,94,0.08) 0%, transparent 70%); }
+
+    .card[data-accent="base64"]:hover { box-shadow: 0 8px 40px rgba(59,130,246,0.2); }
+    .card[data-accent="base64"]::before { background: radial-gradient(ellipse 80% 80% at 50% 0%, rgba(59,130,246,0.08) 0%, transparent 70%); }
+
+    .card[data-accent="regexlab"]:hover { box-shadow: 0 8px 40px rgba(245,158,11,0.2); }
+    .card[data-accent="regexlab"]::before { background: radial-gradient(ellipse 80% 80% at 50% 0%, rgba(245,158,11,0.08) 0%, transparent 70%); }
+
+    .card[data-accent="diffview"]:hover { box-shadow: 0 8px 40px rgba(239,68,68,0.15), 0 8px 40px rgba(34,197,94,0.15); }
+    .card[data-accent="diffview"]::before { background: radial-gradient(ellipse 80% 80% at 50% 0%, rgba(239,68,68,0.06) 0%, rgba(34,197,94,0.06) 60%, transparent 80%); }
+
+    .card[data-accent="hashgen"]:hover { box-shadow: 0 8px 40px rgba(167,139,250,0.2); }
+    .card[data-accent="hashgen"]::before { background: radial-gradient(ellipse 80% 80% at 50% 0%, rgba(167,139,250,0.08) 0%, transparent 70%); }
+
+    /* Card delay for stagger */
+    .card:nth-child(1) { animation-delay: 0.05s; }
+    .card:nth-child(2) { animation-delay: 0.1s; }
+    .card:nth-child(3) { animation-delay: 0.15s; }
+    .card:nth-child(4) { animation-delay: 0.2s; }
+    .card:nth-child(5) { animation-delay: 0.25s; }
+    .card:nth-child(6) { animation-delay: 0.3s; }
+    .card:nth-child(7) { animation-delay: 0.35s; }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      line-height: 1;
+      flex-shrink: 0;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.01em;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    /* Tags */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 100px;
+      background: rgba(255,255,255,0.06);
+      color: var(--text-dim);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* Accent tag color */
+    .card[data-accent="screensnap"] .tag { color: #c4b5fd; background: rgba(124,58,237,0.12); border-color: rgba(124,58,237,0.2); }
+    .card[data-accent="ogpreview"] .tag { color: #67e8f9; background: rgba(6,182,212,0.12); border-color: rgba(6,182,212,0.2); }
+    .card[data-accent="devformat"] .tag { color: #86efac; background: rgba(34,197,94,0.12); border-color: rgba(34,197,94,0.2); }
+    .card[data-accent="base64"] .tag { color: #93c5fd; background: rgba(59,130,246,0.12); border-color: rgba(59,130,246,0.2); }
+    .card[data-accent="regexlab"] .tag { color: #fde68a; background: rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.2); }
+    .card[data-accent="diffview"] .tag { color: #fca5a5; background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.15); }
+    .card[data-accent="hashgen"] .tag { color: #ddd6fe; background: rgba(167,139,250,0.12); border-color: rgba(167,139,250,0.2); }
+
+    /* Link */
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--text-muted);
+      padding: 8px 0 0;
+      transition: color var(--transition), gap var(--transition);
+    }
+
+    .card-link:hover { color: #fff; gap: 10px; }
+
+    .card[data-accent="screensnap"] .card-link:hover { color: #c4b5fd; }
+    .card[data-accent="ogpreview"] .card-link:hover { color: #67e8f9; }
+    .card[data-accent="devformat"] .card-link:hover { color: #86efac; }
+    .card[data-accent="base64"] .card-link:hover { color: #93c5fd; }
+    .card[data-accent="regexlab"] .card-link:hover { color: #fde68a; }
+    .card[data-accent="diffview"] .card-link:hover { color: #fca5a5; }
+    .card[data-accent="hashgen"] .card-link:hover { color: #ddd6fe; }
+
+    /* Divider line at bottom of card */
+    .card::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .card:hover::after { opacity: 1; }
+    .card[data-accent="screensnap"]::after { background: linear-gradient(90deg, transparent, #7c3aed, transparent); }
+    .card[data-accent="ogpreview"]::after { background: linear-gradient(90deg, transparent, #06b6d4, transparent); }
+    .card[data-accent="devformat"]::after { background: linear-gradient(90deg, transparent, #22c55e, transparent); }
+    .card[data-accent="base64"]::after { background: linear-gradient(90deg, transparent, #3b82f6, transparent); }
+    .card[data-accent="regexlab"]::after { background: linear-gradient(90deg, transparent, #f59e0b, transparent); }
+    .card[data-accent="diffview"]::after { background: linear-gradient(90deg, transparent, #ef4444, #22c55e, transparent); }
+    .card[data-accent="hashgen"]::after { background: linear-gradient(90deg, transparent, #a78bfa, transparent); }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-dim);
+    }
+
+    .empty-state .emoji { font-size: 3rem; display: block; margin-bottom: 16px; }
+    .empty-state p { font-size: 15px; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      color: var(--text-dim);
+      font-size: 14px;
+    }
+
+    .footer-tagline {
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color var(--transition);
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+      display: inline-block;
+      animation: pulse 2s ease infinite;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    /* ── HIDDEN (search filter) ── */
+    .card[hidden] { display: none; }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-badge">🛠️ 7 Tools &amp; growing</div>
+    <h1>Free Developer Tools</h1>
+    <p>Beautiful, fast, privacy-first tools that run entirely in your browser. No signup. No tracking. No BS.</p>
+
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input
+        id="search"
+        type="search"
+        placeholder="Search tools — JSON, regex, hash…"
+        aria-label="Search developer tools"
+        autocomplete="off"
+        spellcheck="false"
+      />
+    </div>
+  </header>
+
+  <!-- TOOLS GRID -->
+  <main>
+    <p class="tools-count" id="tools-count">7 tools available</p>
+
+    <div class="grid" id="grid" role="list">
+
+      <!-- ScreenSnap -->
+      <article
+        class="card"
+        data-accent="screensnap"
+        data-search="screensnap screenshot beautify gradients shadows device frames screenshot visual design"
+        role="listitem"
+      >
+        <div class="card-header">
+          <span class="card-icon" aria-hidden="true">🖼️</span>
+          <span class="card-title">ScreenSnap</span>
+        </div>
+        <p class="card-desc">Beautify screenshots with gradients, shadows &amp; device frames. Make your UI shine.</p>
+        <div class="tags">
+          <span class="tag">Screenshot</span>
+          <span class="tag">Design</span>
+          <span class="tag">Visual</span>
+        </div>
+        <a class="card-link" href="https://arthurpierrey.github.io/screensnap/app.html" target="_blank" rel="noopener noreferrer">
+          Open tool →
+        </a>
+      </article>
+
+      <!-- OG Preview -->
+      <article
+        class="card"
+        data-accent="ogpreview"
+        data-search="og preview open graph twitter linkedin discord slack social seo meta tags preview share"
+        role="listitem"
+      >
+        <div class="card-header">
+          <span class="card-icon" aria-hidden="true">🔗</span>
+          <span class="card-title">OG Preview</span>
+        </div>
+        <p class="card-desc">Preview how your site looks when shared on Twitter, LinkedIn, Discord &amp; Slack.</p>
+        <div class="tags">
+          <span class="tag">SEO</span>
+          <span class="tag">Open Graph</span>
+          <span class="tag">Social</span>
+        </div>
+        <a class="card-link" href="https://arthurpierrey.github.io/ogpreview/" target="_blank" rel="noopener noreferrer">
+          Open tool →
+        </a>
+      </article>
+
+      <!-- DevFormat -->
+      <article
+        class="card"
+        data-accent="devformat"
+        data-search="devformat json format beautify validate minify pretty print formatter"
+        role="listitem"
+      >
+        <div class="card-header">
+          <span class="card-icon" aria-hidden="true">📋</span>
+          <span class="card-title">DevFormat</span>
+        </div>
+        <p class="card-desc">Format, beautify, validate &amp; minify JSON. Clean up messy payloads instantly.</p>
+        <div class="tags">
+          <span class="tag">JSON</span>
+          <span class="tag">Formatter</span>
+          <span class="tag">Validator</span>
+        </div>
+        <a class="card-link" href="https://arthurpierrey.github.io/devformat/" target="_blank" rel="noopener noreferrer">
+          Open tool →
+        </a>
+      </article>
+
+      <!-- Base64 Tool -->
+      <article
+        class="card"
+        data-accent="base64"
+        data-search="base64 encode decode text images binary crypto encoding"
+        role="listitem"
+      >
+        <div class="card-header">
+          <span class="card-icon" aria-hidden="true">🔐</span>
+          <span class="card-title">Base64 Tool</span>
+        </div>
+        <p class="card-desc">Encode &amp; decode Base64 for text and images. Fast, offline, no data leaves your browser.</p>
+        <div class="tags">
+          <span class="tag">Base64</span>
+          <span class="tag">Encode</span>
+          <span class="tag">Crypto</span>
+        </div>
+        <a class="card-link" href="https://base64tool-phi.vercel.app/" target="_blank" rel="noopener noreferrer">
+          Open tool →
+        </a>
+      </article>
+
+      <!-- RegexLab -->
+      <article
+        class="card"
+        data-accent="regexlab"
+        data-search="regexlab regex regular expression test live highlighting capture groups pattern match"
+        role="listitem"
+      >
+        <div class="card-header">
+          <span class="card-icon" aria-hidden="true">🔤</span>
+          <span class="card-title">RegexLab</span>
+        </div>
+        <p class="card-desc">Test regular expressions with live highlighting &amp; capture group visualization.</p>
+        <div class="tags">
+          <span class="tag">Regex</span>
+          <span class="tag">Pattern</span>
+          <span class="tag">Testing</span>
+        </div>
+        <a class="card-link" href="https://regextester-kappa.vercel.app/" target="_blank" rel="noopener noreferrer">
+          Open tool →
+        </a>
+      </article>
+
+      <!-- DiffView -->
+      <article
+        class="card"
+        data-accent="diffview"
+        data-search="diffview diff compare text side by side highlight changes difference checker"
+        role="listitem"
+      >
+        <div class="card-header">
+          <span class="card-icon" aria-hidden="true">📝</span>
+          <span class="card-title">DiffView</span>
+        </div>
+        <p class="card-desc">Compare two texts side-by-side with clear diff highlighting. Spot every change.</p>
+        <div class="tags">
+          <span class="tag">Diff</span>
+          <span class="tag">Compare</span>
+          <span class="tag">Text</span>
+        </div>
+        <a class="card-link" href="https://diffchecker-chi.vercel.app/" target="_blank" rel="noopener noreferrer">
+          Open tool →
+        </a>
+      </article>
+
+      <!-- HashGen -->
+      <article
+        class="card"
+        data-accent="hashgen"
+        data-search="hashgen hash generate md5 sha-256 sha-512 checksum crypto hashing"
+        role="listitem"
+      >
+        <div class="card-header">
+          <span class="card-icon" aria-hidden="true">#️⃣</span>
+          <span class="card-title">HashGen</span>
+        </div>
+        <p class="card-desc">Generate MD5, SHA-256 &amp; SHA-512 hashes instantly. Verify checksums with ease.</p>
+        <div class="tags">
+          <span class="tag">Hash</span>
+          <span class="tag">SHA-256</span>
+          <span class="tag">Crypto</span>
+        </div>
+        <a class="card-link" href="https://hashgen-five.vercel.app/" target="_blank" rel="noopener noreferrer">
+          Open tool →
+        </a>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-tagline">Built with 🦊 — All tools are free, open-source, and run in your browser</p>
+      <div class="footer-links">
+        <a href="https://github.com/arthurpierrey" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.165c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          arthurpierrey
+        </a>
+      </div>
+      <span class="footer-note"><span class="dot"></span> New tools added regularly</span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const searchInput = document.getElementById('search');
+      const grid = document.getElementById('grid');
+      const countEl = document.getElementById('tools-count');
+      const cards = Array.from(grid.querySelectorAll('.card'));
+      const total = cards.length;
+
+      function updateCount(visible) {
+        if (visible === total) {
+          countEl.textContent = total + ' tools available';
+        } else {
+          countEl.textContent = visible + ' of ' + total + ' tools';
+        }
+      }
+
+      function filterCards(query) {
+        const q = query.trim().toLowerCase();
+        let visible = 0;
+
+        // Remove existing empty state if any
+        const existing = grid.querySelector('.empty-state');
+        if (existing) existing.remove();
+
+        cards.forEach(function (card) {
+          const haystack = (card.dataset.search || '') + ' ' + (card.textContent || '');
+          const match = !q || haystack.toLowerCase().includes(q);
+          card.hidden = !match;
+          if (match) visible++;
+        });
+
+        updateCount(visible);
+
+        if (visible === 0) {
+          const empty = document.createElement('div');
+          empty.className = 'empty-state';
+          empty.innerHTML = '<span class="emoji">🔍</span><p>No tools match "<strong>' + escapeHtml(query) + '</strong>". Try another keyword.</p>';
+          grid.appendChild(empty);
+        }
+      }
+
+      function escapeHtml(str) {
+        return str.replace(/[&<>"']/g, function (c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+      }
+
+      searchInput.addEventListener('input', function () {
+        filterCards(this.value);
+      });
+
+      // Keyboard shortcut: / to focus search
+      document.addEventListener('keydown', function (e) {
+        if (e.key === '/' && document.activeElement !== searchInput) {
+          e.preventDefault();
+          searchInput.focus();
+          searchInput.select();
+        }
+        if (e.key === 'Escape' && document.activeElement === searchInput) {
+          searchInput.value = '';
+          filterCards('');
+          searchInput.blur();
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
